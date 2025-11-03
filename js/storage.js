@@ -1,4 +1,3 @@
-// js/storage.js
 const LS_KEY = "quiz_game_leaderboard_v1";
 const LS_QS = "quiz_game_questions_v1";
 
