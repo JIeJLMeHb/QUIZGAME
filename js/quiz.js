@@ -1,4 +1,3 @@
-// js/quiz.js
 export class Question {
     constructor(text, choices = [], correctIndex = 0) {
       this.text = text;
@@ -34,7 +33,6 @@ export class Question {
       let bonus = 0;
       if (correct) {
         this.correctCount += 1;
-        // базовое очко + бонус за скорость: бонус = Math.round( (timeLeft / timeLimit) * 5 )
         const timeLeft = Math.max(0, timeLimit - timeTaken);
         bonus = Math.round((timeLeft / timeLimit) * 5);
         this.score += 1 + bonus;
