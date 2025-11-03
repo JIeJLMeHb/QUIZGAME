@@ -1,4 +1,3 @@
-// js/ui.js
 import { getLeaderboard, saveScore, getSavedQuestions, saveQuestions } from './storage.js';
 
 const START = document.getElementById("start-block");
@@ -41,7 +40,6 @@ let timeLimit = 30;
 let presentAnswerHandler = null;
 
 function showPanel(panelEl) {
-  // simple animation: add exit class to all visible, then show the target
   const panels = [START, QUIZ, RESULT, EDITOR];
   panels.forEach(p => {
     if (p === panelEl) return;
@@ -85,12 +83,10 @@ export function bindCallbacks(cb) {
   });
 
   importBtn.addEventListener("click", () => {
-    // prompt for JSON paste
     const raw = prompt("Вставьте JSON-массив вопросов (или отмена):");
     if (!raw) return;
     try {
       const parsed = JSON.parse(raw);
-      // delegate import handling if provided
       cb.onImport && cb.onImport(parsed);
     } catch (e) {
       alert("Некорректный JSON");
@@ -158,7 +154,6 @@ export function presentQuestion(questionObj, index, total, opts = {}) {
     btn.dataset.index = String(idx);
     btn.innerHTML = escapeHtml(choice);
     btn.addEventListener("click", () => {
-      // compute timeTaken
       const timeTaken = Math.floor((Date.now() - timerStart) / 1000);
       stopTimer();
       disableAnswerButtons();
@@ -173,9 +168,8 @@ export function presentQuestion(questionObj, index, total, opts = {}) {
     timerBar.style.width = percent + "%";
     timerEl.textContent = String(left);
   }, () => {
-    // time end handler
     disableAnswerButtons();
-    if (presentAnswerHandler) presentAnswerHandler(-1, timeLimit); // treat as wrong, full timeTaken
+    if (presentAnswerHandler) presentAnswerHandler(-1, timeLimit);
   });
 }
 
