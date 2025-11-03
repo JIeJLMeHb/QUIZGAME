@@ -1,4 +1,3 @@
-// js/app.js
 import { Quiz } from './quiz.js';
 import * as UI from './ui.js';
 import { loadQuestions, importQuestionsFromJsonObject } from './questions-loader.js';
@@ -9,7 +8,6 @@ let playerNick = "Игрок";
 const TIME_PER_QUESTION = 30;
 
 async function init() {
-  // загрузить вопросы (из localStorage или data/questions.json)
   const questions = await loadQuestions();
   quiz = new Quiz(questions);
   UI.bindCallbacks({
@@ -19,7 +17,6 @@ async function init() {
     onRestart: () => restartGame(),
     onImport: (arr) => handleImport(arr)
   });
-  // подключить обработчик ответов
   UI.setPresentOnAnswer((choiceIdx, timeTaken) => {
     handleAnswer(choiceIdx, timeTaken);
   });
@@ -61,7 +58,6 @@ function endGame() {
   
 
 function onQuit() {
-  // показываем результат текущей игры (можно считать как сохранённый)
   endGame();
 }
 
@@ -74,7 +70,6 @@ function restartGame() {
 function handleImport(arr) {
   try {
     const newQs = importQuestionsFromJsonObject(arr);
-    // replace quiz questions
     quiz.replaceQuestions(newQs);
     alert('Импортировано ' + newQs.length + ' вопросов. Игра будет использовать эти вопросы.');
   } catch (e) {
